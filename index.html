@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Above and Beyond Learning</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="js/accord_slide/accordion.css" />
+<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+	<script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.1.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/accord_slide/accordion.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		
+		    // accordion slider
+			$("#featured").kricordion({
+					slides: '.featured',        // wich element inside the container should serve as slide
+					animationSpeed: 500,     // animation duration in milliseconds
+					autorotation: false,         // autorotation true or false?
+					autorotationSpeed:3000,        // duration between autorotation switch in Seconds
+					event: 'mouseover',         // event to focus a slide: mouseover or click
+					imageShadow:true,           // should the image get a drop shadow to the left
+					easing: 'easeOutQuart',     // easing method
+					imageShadowStrength:0.5,	// how dark should that shadow be, recommended values: between 0.3 and 0.8, allowed between 0 and 1
+					backgroundOpacity: 0.6
+			});
+		
+				var menuid = '#menu';
+				var colors = ["#8f388e","#0088ce", "#e2d623", "#8f388e", "#9fbd3b"];
+				activateMenu(menuid, colors);
+				
+			$("#contact").fancybox({
+				'scrolling' : 'no',
+				'autoScale' : false,
+				'titleShow'	: false,
+				'onClosed'	: function() {
+					$("#login_error").hide();
+					$(".error").hide();
+				}
+			});
+			
+			$("#email_form").bind("submit", function() {
+				
+					var evalidate = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+					var emailv = $("#_email").val();
+				
+					if (emailv.length < 1 || !(evalidate.test(emailv))) {
+						$(".error").show();
+						$.fancybox.resize();
+						return false;
+					}
+					
+					$.fancybox.showActivity();
+
+					$.ajax({
+						type	: "POST",
+						cache	: false,
+						url		: "php/sendmail.php",
+						data	: $(this).serializeArray(),
+						success: function(data) {
+							 $.fancybox("images/success.jpg",{
+					'scrolling' : 'no',
+					'content' : '<table style="height: 55px" width="320em" border="0" cellspacing="0" cellpadding="2"><tr><td><img style="margin-right:6px;" src=\"images/success.jpg\"></img></td><td><h2>Thank you for your email</h2></td></tr></table>',
+					'titleShow'	: false}); 
+						}
+					});
+
+					return false;
+				});
+				
+		
+		});
+		
+	</script>
+</head>
+<body>
+<div id="main">
+	<div id="header">
+		<a href="index.html"><img id="logo" src="images/abl_logo.jpg" alt="" width="291px" height="130px" border="0"/></a>
+		<div id="menu">
+			<ul>
+				<li><a href="ses.html">SES</a>
+					<ul>
+						<li class="top"></li>
+						<li><a href="northcarolina.html">North Carolina</a></li>
+						<li><a href="florida.html">Florida</a></li>
+						<li class="bottom"></li>
+					</ul>
+				</li>
+				<li><a href="nclb.html">No Child Left Behind</a></li>
+				<li><a href="privatetutouring.html">Private Tutoring</a></li>
+				<li><a href="testimonials.html">Testimonials</a></li>
+				<li><a href="#email_form" id="contact">Contact Us</a></li>
+			</ul>
+
+		</div>
+	</div>
+<hr class="divider"></hr>
+	<div id="body">
+		<!--<div class="clear"><img class="imgtspace" src="images/home_img.jpg" alt="" width="900px" height="500px" border="0"/></div>-->
+		<div id="feature_wrap">
+
+			<div id="featured">
+
+				<div class="featured">
+					<a href="#">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">Go Above & Beyond Education!</strong>
+							<span class="slidercontent">Going Above & Beyond Education means providing aggressive supplemental education that is consistent with district practices and structured to meet the needs of students in both reading and mathematics in grades K-12.</span>
+						</span>
+						<img src="js/accord_slide/img/slide1.jpg" height="320" width="700" />
+					</a>
+				</div>
+				<div class="featured">
+					<a href="florida.html">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">SES in Florida</strong>
+							<span class="slidercontent">In Florida, Above & Beyond Learning provides free individual in home tutoring as well as after school group tutoring at participating school sites.  We currently provide services in Miami-Dade, Broward, and Palm Beach County.</span>
+						</span>
+						<img src="js/accord_slide/img/slide2new.jpg" height="320" width="700" />
+					</a>
+				</div>
+					<div class="featured">
+					<a href="northcarolina.html">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">SES in North Carolina</strong>
+							<span class="slidercontent">In North Carolina, Above & Beyond Learning provides free individual in home tutoring as well as after school group tutoring at participating school sites.  We currently provide services in Gaston County and Robeson County.</span>
+						</span>
+						<img src="js/accord_slide/img/slide4new.jpg" height="320" width="700" />
+					</a>
+				</div>
+					<div class="featured">
+					<a href="privatetutouring.html">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">Private Tutoring</strong>
+							<span class="slidercontent">Above & Beyond Learning offers low cost private tutoring conducted in the students home or in a public setting such as libraries and community centers.</span>
+						</span>
+						<img src="js/accord_slide/img/slide3new.jpg" height="320" width="700" />
+					</a>
+				</div>
+					<div class="featured">
+					<a href="employment_opportunities.html">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">Join the Above & Beyond Team</strong>
+							<span class="slidercontent">Click Here to Apply</span>
+						</span>
+						<img src="js/accord_slide/img/slide5.jpg" height="320" width="700" />
+					</a>
+				</div>
+					<div class="featured">
+					<a href="franchiseop.html">
+						<span class="feature_excerpt">
+							<strong class="sliderheading">Become an Above & Beyond Franchise </strong>
+							<span class="slidercontent">Future oppurtunities</span>
+						</span>
+						<img src="js/accord_slide/img/slidesixnew.jpg" height="320" width="700" />
+					</a>
+				</div>
+
+			</div>
+
+			</div>
+		<div id="bodytxt">
+			<p>Above and Beyond Learning helps students prepare for standardized tests such as the FCAT and other scholastic tests. We offer free tutoring for those who qualify throughout Miami-Dade & West Palm Beach County. </ br>
+Above and Beyond Learning is funded by the United States Department of Education to offer Supplemental Educational Services to students who qualify. Our Tutors have unlimited experience in all subjects required by the Florida Department of Education. Students throughout Florida are eligible to receive free tutoring if they are enrolled in a eligible public school and receive free or reduced lunch. This program is called:</p>
+		</div>
+	</div>
+<hr class="divider"></hr>
+	<div id="footer">
+		
+		<p id="footxt"><a href="employment_opportunities.html">Employment Opportunities</a>|<a href="franchiseop.html">Franchise Opportunities</a></p>
+		<p class="flright stdfont">Above and Beyond Learning&nbsp;&copy;&nbsp;2010<p>
+	
+	</div>
+</div>
+	<div id="form_container" style="display:none">
+	
+		<form id="email_form" class="appnitro"  method="post" action="">
+			<div class="form_description">
+				<img src="images/contactus_heading.jpg"  width="200px" height="58px" border="0"/>
+			</div>						
+			<ul >
+			
+					<li id="li_2" >
+		<label class="description" for="element_2">Name </label>
+		<span>
+			<input id="_fname" name= "fname" class="element text" maxlength="255" size="20" value=""/>
+			<label>First</label>
+		</span>
+		<span>
+			<input id="_lname" name= "lname" class="element text" maxlength="255" size="20" value=""/>
+			<label>Last</label>
+		</span> 
+		</li>		<li id="li_1" >
+		<label class="description" for="element_1">Phone </label>
+		<span>
+			<input id="_p1" name="p1" class="element text" size="3" maxlength="3" value="" type="text"> -
+			<label for="_p1">(###)</label>
+		</span>
+		<span>
+			<input id="_p2" name="p2" class="element text" size="3" maxlength="3" value="" type="text"> -
+			<label for="_p2">###</label>
+		</span>
+		<span>
+	 		<input id="_p3" name="p3" class="element text" size="4" maxlength="4" value="" type="text">
+			<label for="_p3">####</label>
+		</span>
+		 
+		</li>		<li id="li_3" >
+		<p><label class="description floatl" for="_email">Email </label><span class="error floatr">* Invalid Email address, Please verify address</span></p>
+		<div class="clearb">
+			<input id="_email" name="email" class="element text" type="text" maxlength="255" size="40" value=""/> 
+		</div> 
+		</li>		<li id="li_4" >
+		<label class="description" for="_comment">Comments </label>
+		<div>
+			<textarea id="_comment" name="comm" class="element textarea medium"></textarea> 
+		</div> 
+		</li>
+			
+					<li class="buttons">
+			    <input type="hidden" name="form_id" value="54769" />
+			    
+				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		</li>
+			</ul>
+		<div class="form_btt_desc">
+			<img src="images/abl_logo_small.jpg"  width="225px" height="99px" border="0"/>
+			<div  id="centera"><a href="mailto:SES@above-and-beyondlearning.com">SES@above-and-beyondlearning.com</a></div>
+		</div>
+		
+		</form>	
+	</div>
+</body>
+</html>

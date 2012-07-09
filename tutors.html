@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Above and Beyond Learning</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"> 
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+	<script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.1.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		
+				var menuid = '#menu';
+				var colors = ["#8f388e","#0088ce", "#e2d623", "#9fbd3b"];
+				activateMenu(menuid, colors, 2);
+				
+			$("#contact").fancybox({
+				'scrolling' : 'no',
+				'autoScale' : false,
+				'titleShow'	: false,
+				'onClosed'	: function() {
+					$("#login_error").hide();
+					$(".error").hide();
+				}
+			});
+				
+			$("#email_form").bind("submit", function() {
+				
+					var evalidate = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+					var emailv = $("#_email").val();
+				
+					if (emailv.length < 1 || !(evalidate.test(emailv))) {
+						$(".error").show();
+						$.fancybox.resize();
+						return false;
+					}
+					
+					$.fancybox.showActivity();
+
+					$.ajax({
+						type	: "POST",
+						cache	: false,
+						url		: "php/sendmail.php",
+						data	: $(this).serializeArray(),
+						success: function(data) {
+							 $.fancybox("images/success.jpg",{
+					'scrolling' : 'no',
+					'content' : '<table style="height: 55px" width="320em" border="0" cellspacing="0" cellpadding="2"><tr><td><img style="margin-right:6px;" src=\"images/success.jpg\"></img></td><td><h2>Thank you for your email</h2></td></tr></table>',
+					'titleShow'	: false}); 
+						}
+					});
+
+					return false;
+				});
+		
+		});
+		
+	</script>
+</head>
+<body>
+<div id="main">
+	<div id="header">
+		<a href="index.html"><img id="logo" src="images/abl_logo.jpg" alt="" width="291px" height="130px" border="0"/></a>
+		<div id="menu">
+			<ul>
+				<li><a href="ses.html">SES</a>
+					<ul>
+						<li class="top"></li>
+						<li><a href="northcarolina.html">North Carolina</a></li>
+						<li><a href="florida.html">Florida</a></li>
+						<li class="bottom"></li>
+					</ul>
+				</li>
+				<li><a href="nclb.html">No Child Left Behind</a></li>
+				<li><a href="privatetutouring.html">Tutors</a></li>
+				<li><a href="#email_form" id="contact">Contact Us</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+<hr class="divider"></hr>
+	<div id="body">
+		<div class="clear"><img class="imgtspace" src="images/tutors_img.jpg" alt="" width="900px" height="500px" border="0"/></div>
+		<div id="bodytxt">
+			<p>Above & Beyond learning is continuously in search of qualified tutors to work with our students. All tutors are state certified teachers with the tools needed to be effective on each students needs . All of our tutors are processed through background checks which they must clear as well as understand and sign the Jessica Lunsford Act affidavit. Our tutors have years of teaching experience in which our program has based its success. We strive to teach and motivate each student, from those who are struggling one some subject areas to those that struggle with multiple subjects.<br /><br />
+            
+We have helped our students through the stress and uncertainty they have to face when taking a test like the FCAT. They are taught strengths and mechanisms that they should focus on when taking any test.<br /><br />
+
+Above and Beyond Learning also focuses on the SAT and ACT.</p>
+		</div>
+	</div>
+<hr class="divider"></hr>
+	<div id="footer">
+		
+		<p id="footxt"><a href="employment opportunities.html">Employment Opportunities</a></p>
+		<p class="flright stdfont">Above and Beyond Learning&nbsp;&copy;&nbsp;2010<p>
+	
+	</div>
+</div>
+	<div id="form_container" style="display:none">
+	
+		<form id="email_form" class="appnitro"  method="post" action="">
+			<div class="form_description">
+				<img src="images/contactus_heading.jpg"  width="200px" height="58px" border="0"/>
+			</div>						
+			<ul >
+			
+					<li id="li_2" >
+		<label class="description" for="element_2">Name </label>
+		<span>
+			<input id="_fname" name= "fname" class="element text" maxlength="255" size="20" value=""/>
+			<label>First</label>
+		</span>
+		<span>
+			<input id="_lname" name= "lname" class="element text" maxlength="255" size="20" value=""/>
+			<label>Last</label>
+		</span> 
+		</li>		<li id="li_1" >
+		<label class="description" for="element_1">Phone </label>
+		<span>
+			<input id="_p1" name="p1" class="element text" size="3" maxlength="3" value="" type="text"> -
+			<label for="_p1">(###)</label>
+		</span>
+		<span>
+			<input id="_p2" name="p2" class="element text" size="3" maxlength="3" value="" type="text"> -
+			<label for="_p2">###</label>
+		</span>
+		<span>
+	 		<input id="_p3" name="p3" class="element text" size="4" maxlength="4" value="" type="text">
+			<label for="_p3">####</label>
+		</span>
+		 
+		</li>		<li id="li_3" >
+		<p><label class="description floatl" for="_email">Email </label><span class="error floatr">* Invalid Email address, Please verify address</span></p>
+		<div class="clearb">
+			<input id="_email" name="email" class="element text" type="text" maxlength="255" size="40" value=""/> 
+		</div> 
+		</li>		<li id="li_4" >
+		<label class="description" for="_comment">Comments </label>
+		<div>
+			<textarea id="_comment" name="comm" class="element textarea medium"></textarea> 
+		</div> 
+		</li>
+			
+					<li class="buttons">
+			    <input type="hidden" name="form_id" value="54769" />
+			    
+				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		</li>
+			</ul>
+		<div class="form_btt_desc">
+			<img src="images/abl_logo_small.jpg"  width="225px" height="99px" border="0"/>
+			<div  id="centera"><a href="mailto:SES@above-and-beyondlearning.com">SES@above-and-beyondlearning.com</a></div>
+		</div>
+		
+		</form>	
+	</div>
+</body>
+</html>
